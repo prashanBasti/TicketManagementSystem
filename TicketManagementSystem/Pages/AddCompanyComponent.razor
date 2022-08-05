@@ -1,0 +1,47 @@
+﻿@page "/addcompany"
+@using UseCases.UseCaseInterfaces
+
+@inject NavigationManager NavigationManager
+@inject IAddCompanyUseCase AddCompanyUseCase
+
+<h3>Add Company</h3>
+
+@if (company != null)
+{
+    <EditForm Model = "company" class = "form-inline" OnValidSubmit="OnValidSubmit">
+        <DataAnnotationsValidator></DataAnnotationsValidator>
+        <ValidationSummary> </ValidationSummary>
+
+        <div class="form-group">
+            <label for="name">Name</label>
+            <InputText id="name" @bind-Value="company.Name" class="form-control"></InputText>
+        </div>
+
+        <div class="form-group">
+            <label for="name">Description</label>
+            <InputText id="name" @bind-Value="company.Description" class="form-control"></InputText>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+    </EditForm>
+}
+
+
+@code {
+    private Company company;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        company = new Company();
+    }
+
+    private void OnValidSubmit()
+    {
+        AddCompanyUseCase.Execute(company);
+        NavigationManager.NavigateTo("/companies");
+
+    }
+
+}

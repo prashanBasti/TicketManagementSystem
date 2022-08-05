@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketManagementSystem", "TicketManagementSystem\TicketManagementSystem.csproj", "{13B1381A-F153-4B98-BE92-4CC4E8205A87}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketManagementSystem", "TicketManagementSystem\TicketManagementSystem.csproj", "{13B1381A-F153-4B98-BE92-4CC4E8205A87}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UseCases", "UseCases\UseCases.csproj", "{86695AEE-AD46-4199-8353-D91A03942399}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UseCases", "UseCases\UseCases.csproj", "{86695AEE-AD46-4199-8353-D91A03942399}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreBusiness", "CoreBusiness\CoreBusiness.csproj", "{9CD4DB85-11A3-412C-BC04-568128FC6831}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreBusiness", "CoreBusiness\CoreBusiness.csproj", "{9CD4DB85-11A3-412C-BC04-568128FC6831}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugins.DataStore.InMemory", "Plugins.DataStore.InMemory\Plugins.DataStore.InMemory.csproj", "{DD1BB992-C22E-43BA-B2B6-EF1B09014512}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Plugins.DataStore.InMemory", "Plugins.DataStore.InMemory\Plugins.DataStore.InMemory.csproj", "{DD1BB992-C22E-43BA-B2B6-EF1B09014512}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

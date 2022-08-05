@@ -1,5 +1,6 @@
 ﻿using CoreBusiness;
 using UseCases.DataStorePluginInterfaces;
+using System.Linq;
 
 namespace Plugins.DataStore.InMemory
 {
@@ -17,6 +18,15 @@ namespace Plugins.DataStore.InMemory
                 new Company{CompanyId = 3, Name = "AFC", Description = "Finance" }
             };
         }
+
+        public void AddCompany(Company company)
+        {
+            if (companies.Any(x => x.Name.Equals(company.Name, StringComparison.OrdinalIgnoreCase))) return;
+            var maxId = companies.Max(x => x.CompanyId);
+            company.CompanyId = maxId + 1;
+            companies.Add(company);
+        }
+
         public IEnumerable<Company> GetCompanies()
         {
             return companies;

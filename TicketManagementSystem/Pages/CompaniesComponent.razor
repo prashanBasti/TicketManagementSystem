@@ -1,23 +1,23 @@
 ﻿@page "/companies"
+@inject NavigationManager NavigationManager
 @inject UseCases.IViewCompaniesUseCase ViewCompanyUseCase
-
 
 <h3>Manage Companies</h3>
 
 
 @if (companies != null)
 {
-        <table>
+    <table>
 
-            <thead> 
-                <tr>
-                  <th>Name</th>
-                  <th>Description</th>
-                </tr>
-            </thead>
-            <tbody>
-                 @foreach (var company in companies)
-                 {           
+        <thead> 
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var company in companies)
+            {
                 <tr>
                     <td>@company.Name</td>
                     <td>@company.Description</td>
@@ -26,8 +26,8 @@
             </tbody>
         </table>
 }
-
-
+<br />
+<button type="button" @onclick = "OnClickAddCompany" class=" btn btn-primary">Add Company</button>
 
 @code {
     private List<Company> companies;
@@ -37,6 +37,10 @@
         base.OnInitialized();
 
         companies = ViewCompanyUseCase.Execute()?.ToList();
+    }
 
+    private void OnClickAddCompany()
+    {
+        NavigationManager.NavigateTo("/addcompany");
     }
 }

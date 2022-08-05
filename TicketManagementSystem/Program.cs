@@ -19,6 +19,7 @@ builder.Services.AddScoped<ICompanyRepository, CompanyInMemoryRepository>();
 
 //Injection of Dependencies for Use Cases and Repositories
 builder.Services.AddTransient<IViewCompaniesUseCase, ViewCompaniesUseCase>();
+builder.Services.AddTransient<IAddCompanyUseCase, AddCompanyUseCase>(); 
 
 var app = builder.Build();
 

@@ -9,6 +9,10 @@ namespace UseCases.DataStorePluginInterfaces
 {
     public interface ICompanyRepository
     {
-        public IEnumerable<Company> GetCompanies();
+        IEnumerable<Company> GetCompanies();
+
+        void AddCompany(Company company);
+        
+
     }
 }
