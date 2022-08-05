@@ -8,11 +8,11 @@
 @if (companies != null)
 {
     <table>
-
         <thead> 
             <tr>
                 <th>Name</th>
                 <th>Description</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -21,6 +21,7 @@
                 <tr>
                     <td>@company.Name</td>
                     <td>@company.Description</td>
+                    <td><button type="button" @onclick="@(() => EditCompany(company))" class="btn btn-link">Edit</button></td>
                 </tr>
                 }
             </tbody>
@@ -42,5 +43,10 @@
     private void OnClickAddCompany()
     {
         NavigationManager.NavigateTo("/addcompany");
+    }
+
+    private void EditCompany(Company company)
+    {
+        NavigationManager.NavigateTo($"/editcompany/{company.CompanyId}");
     }
 }

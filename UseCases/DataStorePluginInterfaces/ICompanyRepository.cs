@@ -12,6 +12,9 @@ namespace UseCases.DataStorePluginInterfaces
         IEnumerable<Company> GetCompanies();
 
         void AddCompany(Company company);
+        void UpdateCompany(Company company);
+
+        Company GetCompanyById(int companyId);
         
 
     }

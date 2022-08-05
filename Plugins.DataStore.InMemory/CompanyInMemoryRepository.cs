@@ -27,11 +27,21 @@ namespace Plugins.DataStore.InMemory
             companies.Add(company);
         }
 
+        public void UpdateCompany(Company company)
+        {
+            var companyToUpdate = companies?.FirstOrDefault(x => x.CompanyId == company.CompanyId);
+            if (companyToUpdate != null) companyToUpdate = company;
+        }
+
         public IEnumerable<Company> GetCompanies()
         {
             return companies;
         }
 
+        public Company GetCompanyById(int companyId)
+        {
+            return companies?.FirstOrDefault(x => x.CompanyId == companyId);
+         }
     }
 
 }
