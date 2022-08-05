@@ -3,13 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CoreBusiness;
+using UseCases.DataStorePluginInterfaces;
 
 namespace UseCases
 {
-    internal class ViewCompaniesUseCase
+    public class ViewCompaniesUseCase
     {
+        private readonly ICompanyRepository companyRepository;
+
+        public ViewCompaniesUseCase(ICompanyRepository companyRepository)
+        {
+            this.companyRepository = companyRepository;
+        }
+
         public IEnumerable<Company> Execute()
         {
+            return companyRepository.GetCompanies();
+
         }
 
     }

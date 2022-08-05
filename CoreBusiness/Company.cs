@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CoreBusiness
 {
-    internal class Company
+    public class Company
     {
         public int CompanyId { get; set; }
         public int Name { get; set; }
