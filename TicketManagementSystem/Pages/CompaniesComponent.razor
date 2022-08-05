@@ -1,0 +1,42 @@
+﻿@page "/companies"
+@inject UseCases.IViewCompanyUseCase ViewCompanyUseCase
+
+
+<h3>Manage Companies</h3>
+
+
+@if (companies != null)
+{
+        <table>
+
+            <thead> 
+                <tr>
+                  <th>Name</th>
+                  <th>Description</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                 @foreach (var company in companies)
+                 {           
+                <tr>
+                    <td>@company.Name</td>
+                    <td>@company.Description</td>
+                </tr>
+                }
+            </tbody>
+
+        </table>
+    }
+}
+@code {
+    private List<Company> companies;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        companies = ViewCompanyUseCase.Execute()?.ToList();
+
+    }
+}

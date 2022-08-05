@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace UseCases.DataStorePluginInterfaces
 {
-    internal interface ICompanyRepository
+    public interface ICompanyRepository
     {
         public IEnumerable<Company> GetCompanies();
     }

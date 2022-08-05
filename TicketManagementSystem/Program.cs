@@ -1,6 +1,10 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using Plugins.DataStore.InMemory;
 using TicketManagementSystem.Data;
+using UseCases;
+using UseCases.DataStorePluginInterfaces;
+using UseCases.UseCaseInterfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +12,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
+builder.Services.AddScoped<ICompanyRepository, CompanyInMemoryRepository>();
+
+//Injection of Dependencies for In-Memory Data Store
+builder.Services.AddScoped<ICompanyRepository, CompanyInMemoryRepository>();
+
+//Injection of Dependencies for Use Cases and Repositories
+builder.Services.AddTransient<IViewCompaniesUseCase, ViewCompaniesUseCase>();
 
 var app = builder.Build();
 
