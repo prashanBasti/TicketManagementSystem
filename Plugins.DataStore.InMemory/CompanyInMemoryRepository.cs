@@ -12,9 +12,9 @@ namespace Plugins.DataStore.InMemory
             //Adding some companies for testing
             companies = new List<Company>()
             {
-                new Company{CompanyId = 1, Name = "NationsTrustBank", Description = "Bank" },
-                new Company{CompanyId = 2, Name = "HattonNationalBank", Description = "Bank" },
-                new Company{CompanyId = 3, Name = "AllianceFinance", Description = "FinanceCompany" }
+                new Company{CompanyId = 1, Name = "NTB", Description = "Bank" },
+                new Company{CompanyId = 2, Name = "HNB", Description = "Bank" },
+                new Company{CompanyId = 3, Name = "AFC", Description = "Finance" }
             };
         }
         public IEnumerable<Company> GetCompanies()

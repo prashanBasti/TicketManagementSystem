@@ -1,5 +1,5 @@
 ﻿@page "/companies"
-@inject UseCases.IViewCompanyUseCase ViewCompanyUseCase
+@inject UseCases.IViewCompaniesUseCase ViewCompanyUseCase
 
 
 <h3>Manage Companies</h3>
@@ -15,7 +15,6 @@
                   <th>Description</th>
                 </tr>
             </thead>
-
             <tbody>
                  @foreach (var company in companies)
                  {           
@@ -25,10 +24,11 @@
                 </tr>
                 }
             </tbody>
-
         </table>
-    }
 }
+
+
+
 @code {
     private List<Company> companies;
 

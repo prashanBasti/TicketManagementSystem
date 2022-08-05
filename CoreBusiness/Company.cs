@@ -9,7 +9,7 @@ namespace CoreBusiness
     public class Company
     {
         public int CompanyId { get; set; }
-        public int Name { get; set; }
-        public int Description { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
     }
 }
