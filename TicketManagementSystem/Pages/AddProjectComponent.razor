@@ -1,6 +1,10 @@
-﻿
+﻿@page "/addproject"
+@using UseCases
+
+
 @inject NavigationManager NavigationManager
-@inject IAddProjectUseCase AddProjectUseCase
+@inject UseCases.UseCaseInterfaces.IViewProjectsUseCase ViewCompaniesUseCase
+@inject UseCases.UseCaseInterfaces.IAddProjectUseCase AddProjectUseCase
 @inject IViewCompaniesUseCase ViewCompaniesUseCase
 
 <h3>Add Project</h3>
@@ -18,8 +22,8 @@
 
         <div class="form-group">
             <label for="company">Company</label>
-            <select id="company" @bind = "project.CompanyId">
-                <option value = "0"></option>
+            <select id="company" @bind = "project.CompanyId" class="form-control">
+                <option selected></option>
                 @foreach(var comp in companies)
                 {
                     <option value=" @comp.CompanyId">@comp.Name</option>
@@ -52,7 +56,7 @@
 
     private void OnValidSubmit()
     {
-        AddprojectUseCase.Execute(project);
+        AddProjectUseCase.Execute(project);
         NavigationManager.NavigateTo("/projects");
 
     }
