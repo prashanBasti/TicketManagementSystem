@@ -48,8 +48,11 @@
 
         if(int.TryParse(this.CompanyId,out int ICompanyId))
         {
-            var comp = GetCompanyByIdUseCase.Execute(ICompanyId);
-            var clonedComp = new Company { CompanyId = comp.CompanyId, Name = comp.Name, Description = comp.Description };
+            this.company = GetCompanyByIdUseCase.Execute(ICompanyId);
+
+            //Following code is supposed to replace above... Doesnt work though.
+            //var comp = GetCompanyByIdUseCase.Execute(ICompanyId);
+            //var clonedComp = new Company { CompanyId = comp.CompanyId, Name = comp.Name, Description = comp.Description };
 
         }
 

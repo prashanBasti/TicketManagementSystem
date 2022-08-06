@@ -30,7 +30,11 @@ namespace Plugins.DataStore.InMemory
         public void UpdateCompany(Company company)
         {
             var companyToUpdate = companies?.FirstOrDefault(x => x.CompanyId == company.CompanyId);
-            if (companyToUpdate != null) companyToUpdate = company;
+            if (companyToUpdate != null) //companyToUpdate = company;
+            {
+                companyToUpdate.Name = company.Name;
+                companyToUpdate.Description = company.Description;
+            }
         }
 
         public IEnumerable<Company> GetCompanies()
