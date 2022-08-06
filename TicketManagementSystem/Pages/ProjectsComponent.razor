@@ -25,7 +25,7 @@
                     <td>@GetCompanyByIdUseCase.Execute(project.CompanyId.Value)?.Name</td>
                     <td>@project.Name</td>
                     <td>@project.Description</td>
-
+                    <td><button type="button" class="btn btn-link" @onclick="@(()=>OnEditProject(project))"></button></td>
                 </tr>
             }
         </tbody>
@@ -51,5 +51,12 @@
     {
         NavigationManager.NavigateTo("/addproject");
     }
+
+    private void OnEditProject(Project project)
+    {
+        NavigationManager.NavigateTo(@"$/editproject/{project.ProjectId}");
+    }
+
+
 
 }

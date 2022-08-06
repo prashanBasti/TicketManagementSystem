@@ -11,5 +11,8 @@ namespace UseCases.DataStorePluginInterfaces
     {
         IEnumerable<Project> GetProjects();
         void AddProject(Project project);
+
+        void UpdateProject(Project project);
+        Project GetProjectById(int projectId);
     }
 }

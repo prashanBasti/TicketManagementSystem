@@ -44,5 +44,21 @@ namespace Plugins.DataStore.InMemory
         {
             return projects;
         }
+
+
+        public void UpdateProject(Project project)
+        {
+            var projectToUpdate = GetProjectById(project.ProjectId);
+            if (projectToUpdate != null) //projectToUpdate = company;
+            {
+                projectToUpdate.Name = project.Name;
+                projectToUpdate.CompanyId = project.CompanyId;
+            }
+        }
+
+        public Project GetProjectById(int projectId)
+        {
+            return projects.FirstOrDefault(x => x.ProjectId == projectId);
+        }
     }
 }
