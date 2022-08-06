@@ -7,18 +7,16 @@ using System.Threading.Tasks;
 
 namespace CoreBusiness
 {
-    public class Company
+    public class Project
     {
+        public int ProjectId { get; set; }
+        [Required]
         public int CompanyId { get; set; }
         [Required]
         public string Name { get; set; }
+        [Required]
         public string Description { get; set; }
-
-        public List<Project> Projects { get; set; }
-
-        public bool Any(Func<object, bool> value)
-        {
-            throw new NotImplementedException();
-        }
+        
+        public Company Company { get; set; }
     }
 }

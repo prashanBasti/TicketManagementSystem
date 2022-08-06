@@ -1,5 +1,4 @@
-﻿using CoreBusiness;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,19 +6,20 @@ using System.Threading.Tasks;
 using UseCases.DataStorePluginInterfaces;
 using UseCases.UseCaseInterfaces;
 
-namespace UseCases
+namespace UseCases.CompaniesUseCases
 {
-    public class GetCompanyByIdUseCase : IGetCompanyByIdUseCase
+    public class DeleteCompanyUseCase : IDeleteCompanyUseCase
     {
         private readonly ICompanyRepository companyRepository;
 
-        public GetCompanyByIdUseCase(ICompanyRepository companyRepository)
+        public DeleteCompanyUseCase(ICompanyRepository companyRepository)
         {
             this.companyRepository = companyRepository;
         }
-        public Company Execute(int companyId)
+
+        public void Delete(int companyId)
         {
-            return companyRepository.GetCompanyById(companyId);
+            companyRepository.DeleteCompany(companyId);
         }
     }
 }

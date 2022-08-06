@@ -1,27 +1,28 @@
-﻿using CoreBusiness;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CoreBusiness;
 using UseCases.DataStorePluginInterfaces;
 using UseCases.UseCaseInterfaces;
 
-namespace UseCases
+namespace UseCases.CompaniesUseCases
 {
-    public class AddCompanyUseCase : IAddCompanyUseCase
+    public class ViewCompaniesUseCase : IViewCompaniesUseCase
     {
         private readonly ICompanyRepository companyRepository;
 
-        public AddCompanyUseCase(ICompanyRepository companyRepository)
+        public ViewCompaniesUseCase(ICompanyRepository companyRepository)
         {
             this.companyRepository = companyRepository;
         }
 
-
-        public void Execute(Company company)
+        public IEnumerable<Company> Execute()
         {
-            companyRepository.AddCompany(company);
+            return companyRepository.GetCompanies();
+
         }
+
     }
 }
