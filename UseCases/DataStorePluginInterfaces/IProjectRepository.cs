@@ -10,5 +10,6 @@ namespace UseCases.DataStorePluginInterfaces
     public  interface IProjectRepository
     {
         IEnumerable<Project> GetProjects();
+        void AddProject(Project project);
     }
 }

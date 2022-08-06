@@ -27,6 +27,7 @@ builder.Services.AddTransient<IEditCompanyUseCase, EditCompanyUseCase>();
 builder.Services.AddTransient<IGetCompanyByIdUseCase, GetCompanyByIdUseCase>();
 builder.Services.AddTransient<IDeleteCompanyUseCase, DeleteCompanyUseCase>();
 builder.Services.AddTransient<IViewProjectsUseCase, ViewProjectsUseCase>();
+builder.Services.AddTransient<IAddProjectUseCase, AddProjectUseCase>(); 
 
 
 

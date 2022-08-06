@@ -23,6 +23,23 @@ namespace Plugins.DataStore.InMemory
            };
         }
 
+        public void AddProject(Project project)
+        {
+            if (projects.Any(x => x.Name.Equals(project.Name, StringComparison.OrdinalIgnoreCase))) return;
+
+            if (projects != null && projects.Count > 0)
+            {
+                var maxId = projects.Max(x => x.ProjectId);
+                project.ProjectId = maxId + 1;
+            }
+            else
+            {
+                project.ProjectId = 1;
+            }
+
+            projects.Add(project);
+        }
+
         public IEnumerable<Project> GetProjects()
         {
             return projects;
