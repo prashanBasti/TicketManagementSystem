@@ -13,9 +13,7 @@ namespace UseCases.DataStorePluginInterfaces
 
         void AddCompany(Company company);
         void UpdateCompany(Company company);
-
         Company GetCompanyById(int companyId);
-        
-
+        void DeleteCompany(int companyId);
     }
 }

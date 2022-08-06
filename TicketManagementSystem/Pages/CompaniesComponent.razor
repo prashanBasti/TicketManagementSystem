@@ -1,6 +1,7 @@
 ﻿@page "/companies"
 @inject NavigationManager NavigationManager
 @inject UseCases.IViewCompaniesUseCase ViewCompanyUseCase
+@inject UseCases.UseCaseInterfaces.IDeleteCompanyUseCase DeleteCompanyUseCase 
 
 <h3>Manage Companies</h3>
 
@@ -21,7 +22,10 @@
                 <tr>
                     <td>@company.Name</td>
                     <td>@company.Description</td>
-                    <td><button type="button" @onclick="@(() => EditCompany(company))" class="btn btn-link">Edit</button></td>
+                    <td>
+                        <button type="button" @onclick="@(() => EditCompany(company))" class="btn btn-link">Edit</button>
+                        <button type="button" @onclick="@(() => DeleteCompany(company.CompanyId))" class="btn btn-link">Delete</button>
+                     </td>
                 </tr>
                 }
             </tbody>
@@ -36,8 +40,7 @@
     protected override void OnInitialized()
     {
         base.OnInitialized();
-
-        companies = ViewCompanyUseCase.Execute()?.ToList();
+        LoadCompanies();
     }
 
     private void OnClickAddCompany()
@@ -48,5 +51,16 @@
     private void EditCompany(Company company)
     {
         NavigationManager.NavigateTo($"/editcompany/{company.CompanyId}");
+    }
+
+    private void DeleteCompany(int companyId)
+    {
+        DeleteCompanyUseCase.Delete(companyId);
+         LoadCompanies();
+    }
+
+    private void LoadCompanies()
+    {
+        companies = ViewCompanyUseCase.Execute()?.ToList();
     }
 }

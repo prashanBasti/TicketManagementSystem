@@ -22,8 +22,17 @@ namespace Plugins.DataStore.InMemory
         public void AddCompany(Company company)
         {
             if (companies.Any(x => x.Name.Equals(company.Name, StringComparison.OrdinalIgnoreCase))) return;
-            var maxId = companies.Max(x => x.CompanyId);
-            company.CompanyId = maxId + 1;
+
+            if(companies != null && companies.Count > 0)
+            {
+                var maxId = companies.Max(x => x.CompanyId);
+                company.CompanyId = maxId + 1;
+            }
+            else
+            {
+                company.CompanyId = 1;
+            }
+            
             companies.Add(company);
         }
 
@@ -45,7 +54,11 @@ namespace Plugins.DataStore.InMemory
         public Company GetCompanyById(int companyId)
         {
             return companies?.FirstOrDefault(x => x.CompanyId == companyId);
-         }
+        }
+        public void DeleteCompany(int companyId)
+        {
+            companies?.Remove(GetCompanyById(companyId));
+        }
     }
 
 }
