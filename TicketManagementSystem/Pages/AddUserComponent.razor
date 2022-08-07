@@ -1,0 +1,66 @@
+﻿
+@page "/adduser"
+
+@using UseCases
+
+
+@inject NavigationManager NavigationManager
+@inject UseCases.UseCaseInterfaces.IViewUsersUseCase ViewUsersUseCase
+@inject UseCases.UseCaseInterfaces.IAddUserUseCase AddUserUseCase
+@inject UseCases.UseCaseInterfaces.IGetProjectByIdUseCase GetProjectByIdUseCase
+
+<h3>Add User</h3>
+
+@if (project != null)
+{
+    <EditForm Model = "user" class = "form-inline" OnValidSubmit="OnValidSubmit">
+        <DataAnnotationsValidator></DataAnnotationsValidator>
+        <ValidationSummary> </ValidationSummary>
+
+        <div class="form-group">
+            <label for="name">Name</label>
+            <InputText id="name" @bind-Value="user.Name" class="form-control"></InputText>
+        </div>
+
+        <div class="form-group">
+            <label for="project">Project</label>
+            <select id="project" @bind = "user.ProjectId" class="form-control">
+                <option selected></option>
+                @foreach (var comp in projects)
+                {
+                    <option value=" @comp.ProjectId">@comp.Name</option>
+                }
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-primary" @onclick="OnCancel">Cancel</button>
+    </EditForm>
+}
+
+
+@code {
+    private User user;
+    private IEnumerable<Project> projects;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        user = new User();
+        user = ViewUsersUseCase.Execute();
+    }
+
+    private void OnValidSubmit()
+    {
+        AddUserComponent.Execute(User);
+        NavigationManager.NavigateTo("/users");
+
+    }
+
+    private void OnCancel()
+    {
+        NavigationManager.NavigateTo("/users");
+    }
+
+}

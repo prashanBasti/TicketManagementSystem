@@ -14,5 +14,7 @@ namespace UseCases.DataStorePluginInterfaces
 
         void UpdateProject(Project project);
         Project GetProjectById(int projectId);
+
+        void DeleteProject(int projectId);
     }
 }

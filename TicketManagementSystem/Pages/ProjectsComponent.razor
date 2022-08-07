@@ -3,6 +3,7 @@
 @using UseCases.UseCaseInterfaces
 @inject IViewProjectsUseCase ViewProjectsUseCase
 @inject IGetCompanyByIdUseCase GetCompanyByIdUseCase
+@inject IDeleteProjectUseCase DeleteProjectUseCase
 @inject NavigationManager NavigationManager
 
 <h3>Projects</h3>
@@ -25,7 +26,12 @@
                     <td>@GetCompanyByIdUseCase.Execute(project.CompanyId.Value)?.Name</td>
                     <td>@project.Name</td>
                     <td>@project.Description</td>
-                    <td><button type="button" class="btn btn-link" @onclick="@(()=>OnEditProject(project))">Edit</button></td>
+                    <td>
+                        <button type="button" class="btn btn-link" @onclick="@(()=>OnEditProject(project))">Edit</button>
+                        &nbsp;
+                        <button type="button" class="btn btn-link" @onclick="@(()=>OnDeleteProject(project.ProjectId))">Delete</button>
+
+                    </td>
                 </tr>
             }
         </tbody>
@@ -57,6 +63,10 @@
         NavigationManager.NavigateTo($"/editproject/{project.ProjectId}");
     }
 
+    private void OnDeleteProject(int projectId)
+    {
+        DeleteProjectUseCase.Execute(projectId);
+    }
 
 
 }

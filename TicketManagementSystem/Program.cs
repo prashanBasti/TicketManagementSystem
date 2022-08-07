@@ -6,6 +6,7 @@ using UseCases;
 using UseCases.CompaniesUseCases;
 using UseCases.DataStorePluginInterfaces;
 using UseCases.UseCaseInterfaces;
+using UseCases.UsersUseCases;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,11 +27,18 @@ builder.Services.AddTransient<IAddCompanyUseCase, AddCompanyUseCase>();
 builder.Services.AddTransient<IEditCompanyUseCase, EditCompanyUseCase>();
 builder.Services.AddTransient<IGetCompanyByIdUseCase, GetCompanyByIdUseCase>();
 builder.Services.AddTransient<IDeleteCompanyUseCase, DeleteCompanyUseCase>();
+
 builder.Services.AddTransient<IViewProjectsUseCase, ViewProjectsUseCase>();
 builder.Services.AddTransient<IAddProjectUseCase, AddProjectUseCase>(); 
 builder.Services.AddTransient<IEditProjectUseCase, EditProjectUseCase>();
 builder.Services.AddTransient<IGetProjectByIdUseCase, GetProjectByIdUseCase>();
+builder.Services.AddTransient<IDeleteProjectUseCase, DeleteProjectUseCase>();
 
+builder.Services.AddTransient<IAddUserUseCase, AddUserUseCase>();
+builder.Services.AddTransient<IViewUsersUseCase, ViewUsersUseCase>(); 
+builder.Services.AddTransient<IEditUserUseCase, EditUserUseCase>();
+builder.Services.AddTransient<IDeleteUserUseCase, DeleteUserUseCase>();
+builder.Services.AddTransient<IGetUserByIdUseCase, GetUserByIdUseCase>();
 
 
 var app = builder.Build();

@@ -1,0 +1,70 @@
+﻿@page "/users"
+
+@using UseCases.UseCaseInterfaces
+@inject IViewUsersUseCase ViewUsersUseCase
+@inject IGetProjectByIdUseCase GetProjectByIdUseCase
+@inject NavigationManager NavigationManager
+@inject IDeleteUserUseCase DeleteUserUseCase
+
+<h3>Users</h3>
+<br />
+@if(users != null)
+{
+    <table>
+        <thead> 
+            <tr>
+                <th>User's Project</th>
+                <th>User Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var user in users)
+
+            {
+                <tr>
+                    <td>@GetProjectByIdUseCase.Execute(user.ProjectId.Value)?.Name</td>
+                    <td>@user.Name</td>
+                    <td>
+                        <button type="button" class="btn btn-link" @onclick="@(()=>OnEditUser(user))">Edit</button>
+                        &nbsp;
+                        <button type="button" class="btn btn-link" @onclick="@(()=>OnDeleteUser(user.UserId))">Delete</button>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+<br /> 
+<button type="button" @onclick = "OnClickAddUser" class=" btn btn-primary">Add User</button>
+
+
+
+
+@code {
+    private IEnumerable<User> users;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        users = ViewUsersUseCase.Execute();
+    }
+
+    private void OnClickAddUser()
+    {
+        NavigationManager.NavigateTo("/adduser");
+    }
+
+    private void OnEditUser(User user)
+    {
+        NavigationManager.NavigateTo($"/edituser/{user.UserId}");
+    }
+
+    private void OnDeleteUser(int userId)
+    {
+        DeleteUserUseCase.Execute(userId);
+    }
+
+
+}

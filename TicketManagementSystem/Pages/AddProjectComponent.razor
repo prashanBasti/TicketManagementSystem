@@ -24,7 +24,7 @@
             <label for="company">Company</label>
             <select id="company" @bind = "project.CompanyId" class="form-control">
                 <option selected></option>
-                @foreach(var comp in companies)
+                @foreach (var comp in companies)
                 {
                     <option value=" @comp.CompanyId">@comp.Name</option>
                 }

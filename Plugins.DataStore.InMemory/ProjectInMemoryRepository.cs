@@ -60,5 +60,11 @@ namespace Plugins.DataStore.InMemory
         {
             return projects.FirstOrDefault(x => x.ProjectId == projectId);
         }
+
+        public void DeleteProject(int projectId)
+        {
+            var projectToDelete = GetProjectById(projectId);
+            if (projectId != null) projects.Remove(projectToDelete);
+        }
     }
 }

@@ -1,0 +1,86 @@
+﻿
+@page "/edituser/{userId}"
+
+@using UseCases
+@using UseCases.UseCaseInterfaces
+
+@inject NavigationManager NavigationManager
+@inject IAddUserUseCase AddUserUseCase
+@inject UseCases.UseCaseInterfaces.IGetUserByIdUseCase GetUserByIdUseCase
+@inject IEditUserUseCase EditUserUseCase
+@inject IViewProjectsUseCase ViewProjectsUseCase
+
+<h3>Edit User</h3>
+<br />
+@if (user != null)
+{
+    <EditForm Model = "user" OnValidSubmit="OnValidSubmit">
+        <DataAnnotationsValidator></DataAnnotationsValidator>
+        <ValidationSummary> </ValidationSummary>
+
+        <div class="form-group">
+            <label for="name">Name</label>
+            <InputText id="name" @bind-Value="user.Name" class="form-control"></InputText>
+        </div>
+
+        <div class="form-group">
+            <label for="company">Project</label>
+            <select id="company" @bind="user.ProjectId" class="form-control">
+                <option selected></option>
+                @foreach (var usr in users)
+                {
+                    <option value ="@usr.UserId">@usr.Name</option>
+                }
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-primary" @onclick="OnCancel">Cancel</button>
+    </EditForm>
+}
+
+
+@code {
+    [Parameter]
+    public string UserId { get; set; }
+
+    private User user;
+    private IEnumerable<Project> projects;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        projects = ViewProjectsUseCase.Execute();
+    }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        if(int.TryParse(this.UserId,out int IUserId))
+        {
+            var usr = GeUserByIdUseCase.Execute(IUserId);
+            this.user = new User { 
+                UserId = usr.UserId, 
+                Name = usr.Name,
+                ProjectId = usr.ProjectId,
+        };
+
+        }
+
+    }
+
+    private void OnValidSubmit()
+    {
+        EditUserUseCase.Execute(this.user);
+        NavigationManager.NavigateTo("/users");
+
+    }
+
+    private void OnCancel()
+    {
+        NavigationManager.NavigateTo("/users");
+    }
+
+}
