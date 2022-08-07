@@ -12,7 +12,6 @@ namespace UseCases.DataStorePluginInterfaces
 
         IEnumerable<User> GetUsers();
         void AddUser(User user);
-
         User GetUserById(int userId);
 
         void UpdateUser(User user);

@@ -8,7 +8,7 @@ using UseCases.DataStorePluginInterfaces;
 
 namespace Plugins.DataStore.InMemory
 {
-    public class UserInMemoryRepository : IUserInMemoryRepository
+    public class UserInMemoryRepository : IUserRepository
     {
         private List<User> users;
         public UserInMemoryRepository()
@@ -17,8 +17,7 @@ namespace Plugins.DataStore.InMemory
             users = new List<User>()
            {
                new User {UserId = 1, ProjectId = 1, Name = "Prashan Bastiansz"},
-               new User {UserId = 2, ProjectId = 2, Name = "Anushi Wilson"},
-
+               new User {UserId = 2, ProjectId = 2, Name = "Anushi Wilson"}
            };
         }
 
@@ -42,6 +41,27 @@ namespace Plugins.DataStore.InMemory
             }
 
             users.Add(user);
+        }
+
+        public User GetUserById(int userId)
+        {
+            return users.FirstOrDefault(x => x.UserId == userId);
+        }
+
+        public void UpdateUser(User user)
+        {
+            var userToUpdate = GetUserById(user.UserId);
+            if (userToUpdate != null) //projectToUpdate = company;
+            {
+                userToUpdate.Name = user.Name;
+                userToUpdate.UserId = user.UserId;
+            }
+        }
+
+        public void DeleteUser(int userId)
+        {
+            var userToDelete = GetUserById(userId);
+            if (userId != null) users.Remove(userToDelete);
         }
     }
 }

@@ -6,12 +6,13 @@
 
 @inject NavigationManager NavigationManager
 @inject UseCases.UseCaseInterfaces.IViewUsersUseCase ViewUsersUseCase
-@inject UseCases.UseCaseInterfaces.IAddUserUseCase AddUserUseCase
+@inject UseCases.UseCaseInterfaces.IAddUserUseCase AddUserUseCase 
 @inject UseCases.UseCaseInterfaces.IGetProjectByIdUseCase GetProjectByIdUseCase
+@inject UseCases.UseCaseInterfaces.IViewProjectsUseCase ViewProjectsUseCase
 
 <h3>Add User</h3>
 
-@if (project != null)
+@if (user != null)
 {
     <EditForm Model = "user" class = "form-inline" OnValidSubmit="OnValidSubmit">
         <DataAnnotationsValidator></DataAnnotationsValidator>
@@ -48,12 +49,12 @@
         base.OnInitialized();
 
         user = new User();
-        user = ViewUsersUseCase.Execute();
+        projects = ViewProjectsUseCase.Execute();
     }
 
     private void OnValidSubmit()
     {
-        AddUserComponent.Execute(User);
+        AddUserUseCase.Execute(user);
         NavigationManager.NavigateTo("/users");
 
     }

@@ -19,6 +19,7 @@ builder.Services.AddScoped<ICompanyRepository, CompanyInMemoryRepository>();
 //Injection of Dependencies for In-Memory Data Store
 builder.Services.AddScoped<ICompanyRepository, CompanyInMemoryRepository>();
 builder.Services.AddScoped<IProjectRepository, ProjectInMemoryRepository>();
+builder.Services.AddScoped<IUserRepository, UserInMemoryRepository>();
 
 
 //Injection of Dependencies for Use Cases and Repositories
@@ -36,7 +37,7 @@ builder.Services.AddTransient<IDeleteProjectUseCase, DeleteProjectUseCase>();
 
 builder.Services.AddTransient<IAddUserUseCase, AddUserUseCase>();
 builder.Services.AddTransient<IViewUsersUseCase, ViewUsersUseCase>(); 
-builder.Services.AddTransient<IEditUserUseCase, EditUserUseCase>();
+builder.Services.AddTransient<IEditUserUseCase, EditUserUseCase>(); 
 builder.Services.AddTransient<IDeleteUserUseCase, DeleteUserUseCase>();
 builder.Services.AddTransient<IGetUserByIdUseCase, GetUserByIdUseCase>();
 

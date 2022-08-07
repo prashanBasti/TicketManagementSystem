@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using UseCases.DataStorePluginInterfaces;
 using UseCases.UseCaseInterfaces;
 
-namespace UseCases
+namespace UseCases.UsersUseCases
 {
-    public class EditUserUseCase
+    public class EditUserUseCase : IEditUserUseCase
     {
         private readonly IUserRepository userRepository;
 
@@ -17,7 +17,7 @@ namespace UseCases
         {
             this.userRepository = userRepository;
         }
-        public void Execute(Project user)
+        public void Execute(User user)
         {
             userRepository.UpdateUser(user);
         }

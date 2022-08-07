@@ -11,11 +11,12 @@ namespace UseCases.UsersUseCases
 {
     public class ViewUsersUseCase : IViewUsersUseCase
     {
-        private readonly IViewUsersUseCase usersUseCase;
 
-        public ViewUsersUseCase(IViewUsersUseCase usersUseCase)
+        private readonly IUserRepository userRepository;
+
+        public ViewUsersUseCase(IUserRepository userRepository)
         {
-            this.usersUseCase = usersUseCase;
+            this.userRepository = userRepository;
         }
 
         public IEnumerable<User> Execute()
