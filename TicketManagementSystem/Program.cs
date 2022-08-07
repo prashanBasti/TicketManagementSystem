@@ -48,7 +48,10 @@ builder.Services.AddTransient<IAddTicketUseCase, AddTicketUseCase>();
 builder.Services.AddTransient<IViewTicketUseCase, ViewTicketUseCase>(); 
 builder.Services.AddTransient<IEditTicketUseCase, EditTicketUseCase>(); 
 builder.Services.AddTransient<IDeleteTicketUseCase, DeleteTicketUseCase>();
-builder.Services.AddTransient<IGetTicketByIdUseCase, GetTicketByIdUseCase>();   
+builder.Services.AddTransient<IGetTicketByIdUseCase, GetTicketByIdUseCase>();
+
+builder.Services.AddTransient<IGetTransactionsUseCase, GetTransactionsUseCase>();
+
 
 
 var app = builder.Build();

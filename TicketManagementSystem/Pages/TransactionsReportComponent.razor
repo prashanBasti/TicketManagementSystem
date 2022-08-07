@@ -1,0 +1,44 @@
+﻿@page "/transactions" 
+
+@using UseCases
+@inject IJSRuntime JS
+
+<h3>Board Report</h3>
+
+<div class = "row">
+        <div class=" col-4 ">
+           <label for="ticketstatus">Ticket Status</label> 
+           <input type="text" id="ticketstatus" class="form-control" @bind-value="ticketStatus"/>
+        </div>
+
+        <div class = col-2">
+            <label>&nbsp;</label>
+            <button type="button" class="btn btn-primary form-control" @onclick="LoadTransactions">Search</button>
+        </div>
+
+        
+        <div class = col-2">
+            <label>&nbsp;</label>
+            <button type="button" class="btn btn-primary form-control" @onclick="PrintReport">Print</button>
+        </div>
+</div>
+<br />
+
+@code {
+    private string ticketStatus;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+    }
+
+    private void LoadTransactions()
+    {
+        transactions = GetTransactionsUseCase.Execute(ticketStatus);
+    }
+
+    private void PrintReport()
+    {
+        JS.InvokeVoidAsync("print");
+    }
+}
