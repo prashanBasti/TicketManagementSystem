@@ -1,11 +1,14 @@
 ﻿
 @page "/editproject/{projectId}"
+
+@using UseCases
 @using UseCases.UseCaseInterfaces
 
 @inject NavigationManager NavigationManager
 @inject IAddProjectUseCase AddProjectUseCase
 @inject IGetProjectByIdUseCase GetProjectByIdUseCase
 @inject IEditProjectUseCase EditProjectUseCase
+@inject IViewCompaniesUseCase ViewCompaniesUseCase
 
 <h3>Edit Project</h3>
 <br />
@@ -16,13 +19,24 @@
         <ValidationSummary> </ValidationSummary>
 
         <div class="form-group">
-            <label for="name">Company</label>
-            <InputText id="name" @bind-Value="project.CompanyId" class="form-control"></InputText>
+            <label for="name">Name</label>
+            <InputText id="name" @bind-Value="project.Name" class="form-control"></InputText>
         </div>
 
         <div class="form-group">
-            <label for="description">Description</label>
-            <InputText id="description" @bind-Value="project.Description" class="form-control"></InputText>
+            <label for="company">Company</label>
+            <select id="company" @bind="project.CompanyId" class="form-control">
+                <option selected></option>
+                @foreach (var comp in companies)
+                {
+                    <option value ="@comp.CompanyId">@comp.Name</option>
+                }
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="name">Description</label>
+            <InputText id="name" @bind-Value="project.Description" class="form-control"></InputText>
         </div>
 
         <button type="submit" class="btn btn-primary">Save</button>
@@ -36,11 +50,13 @@
     public string ProjectId { get; set; }
 
     private Project project;
+    private IEnumerable<Company> companies;
 
     protected override void OnInitialized()
     {
         base.OnInitialized();
 
+        companies = ViewCompaniesUseCase.Execute();
     }
 
     protected override void OnParametersSet()
@@ -49,11 +65,13 @@
 
         if(int.TryParse(this.ProjectId,out int IProjectId))
         {
-            this.project = GetProjectByIdUseCase.Execute(IProjectId);
-
-            //Following code is supposed to replace above... Doesnt work though.
-            //var comp = GetProjectByIdUseCase.Execute(IProjectId);
-            //var clonedComp = new Project { ProjectId = comp.ProjectId, Name = comp.Name, Description = comp.Description };
+            var proj = GetProjectByIdUseCase.Execute(IProjectId);
+            this.project = new Project { 
+                ProjectId = proj.ProjectId, 
+                Name = proj.Name,
+                CompanyId = proj.CompanyId,
+                Description = proj.Description
+        };
 
         }
 
@@ -62,13 +80,13 @@
     private void OnValidSubmit()
     {
         EditProjectUseCase.Execute(this.project);
-        NavigationManager.NavigateTo("/companies");
+        NavigationManager.NavigateTo("/projects");
 
     }
 
     private void OnCancel()
     {
-        NavigationManager.NavigateTo("/companies");
+        NavigationManager.NavigateTo("/projects");
     }
 
 }
