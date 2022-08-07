@@ -6,9 +6,10 @@
 
 @inject NavigationManager NavigationManager
 @inject IAddProjectUseCase AddProjectUseCase
-@inject UseCases.UseCaseInterfaces.IGetProjectByIdUseCase GetProjectByIdUseCase
-@inject IEditProjectUseCase EditProjectUseCase
+@inject UseCases.UseCaseInterfaces.IGetTicketByIdUseCase GetTicketByIdUseCase
+@inject IEditTicketUseCase EditTicketUseCase
 @inject IViewCompaniesUseCase ViewCompaniesUseCase
+@inject IViewUsersUseCase ViewUsersUseCase
 
 <h3>Edit Ticket</h3>
 <br />
@@ -34,11 +35,6 @@
             </select>
         </div>
 
-        <div class="form-group">
-            <label for="name">Description</label>
-            <InputText id="name" @bind-Value="project.Description" class="form-control"></InputText>
-        </div>
-
         <button type="submit" class="btn btn-primary">Save</button>
         <button type="button" class="btn btn-primary" @onclick="OnCancel">Cancel</button>
     </EditForm>
@@ -56,7 +52,7 @@
     {
         base.OnInitialized();
 
-        companies = ViewUsersUseCase.Execute();
+        users = ViewUsersUseCase.Execute();
     }
 
     protected override void OnParametersSet()

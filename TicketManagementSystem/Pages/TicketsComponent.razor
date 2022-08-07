@@ -3,9 +3,10 @@
 @using UseCases.TicketsUseCases
 @using UseCases.UseCaseInterfaces
 @using UseCases.UsersUseCases
-@inject IViewProjectsUseCase ViewProjectsUseCase
+@inject IViewTicketUseCase ViewTicketUseCase
 @inject IGetCompanyByIdUseCase GetCompanyByIdUseCase
-@inject IDeleteProjectUseCase DeleteProjectUseCase
+@inject IDeleteTicketUseCase DeleteTicketUseCase
+@inject IGetUserByIdUseCase GetUserByIdUseCase
 @inject NavigationManager NavigationManager
 
 <h3>Tickets</h3>
@@ -24,7 +25,7 @@
 
             {
                 <tr>
-                    <td>@GetUserByIdUseCase.Execute(ticket.UserId.Value)?.Name</td>
+                    <td>@GetUserByIdUseCase.Execute(ticket.UserId)?.Name</td>
                     <td>@ticket.Name</td>
                     <td>
                         <button type="button" class="btn btn-link" @onclick="@(()=>OnEditTicket(ticket))">Edit</button>
@@ -50,12 +51,12 @@
     {
         base.OnInitialized();
 
-        tickets = ViewTicketsUseCase.Execute();
+        tickets = ViewTicketUseCase.Execute();
     }
 
     private void OnClickAddTicket()
     {
-        NavigationManager.NavigateTo("/addtickets");
+        NavigationManager.NavigateTo("/addticket");
     }
 
     private void OnEditTicket(Ticket ticket)

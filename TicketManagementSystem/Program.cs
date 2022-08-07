@@ -21,6 +21,8 @@ builder.Services.AddScoped<ICompanyRepository, CompanyInMemoryRepository>();
 builder.Services.AddScoped<ICompanyRepository, CompanyInMemoryRepository>();
 builder.Services.AddScoped<IProjectRepository, ProjectInMemoryRepository>();
 builder.Services.AddScoped<IUserRepository, UserInMemoryRepository>();
+builder.Services.AddScoped<ITicketRepository, TicketInMemoryRepository>();
+
 
 
 //Injection of Dependencies for Use Cases and Repositories
@@ -41,6 +43,12 @@ builder.Services.AddTransient<IViewUsersUseCase, ViewUsersUseCase>();
 builder.Services.AddTransient<IEditUserUseCase, EditUserUseCase>(); 
 builder.Services.AddTransient<IDeleteUserUseCase, DeleteUserUseCase>();
 builder.Services.AddTransient<IGetUserByIdUseCase, GetUserByIdUseCase>();
+
+builder.Services.AddTransient<IAddTicketUseCase, AddTicketUseCase>();   
+builder.Services.AddTransient<IViewTicketUseCase, ViewTicketUseCase>(); 
+builder.Services.AddTransient<IEditTicketUseCase, EditTicketUseCase>(); 
+builder.Services.AddTransient<IDeleteTicketUseCase, DeleteTicketUseCase>();
+builder.Services.AddTransient<IGetTicketByIdUseCase, GetTicketByIdUseCase>();   
 
 
 var app = builder.Build();
