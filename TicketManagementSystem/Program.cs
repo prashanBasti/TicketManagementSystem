@@ -5,6 +5,7 @@ using TicketManagementSystem.Data;
 using UseCases;
 using UseCases.CompaniesUseCases;
 using UseCases.DataStorePluginInterfaces;
+using UseCases.TicketsUseCases;
 using UseCases.UseCaseInterfaces;
 using UseCases.UsersUseCases;
 
