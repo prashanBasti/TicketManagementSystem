@@ -17,6 +17,7 @@ namespace CoreBusiness
         [Required]
         public string Description { get; set; }
         
+        //navigation prop for EF core
         public Company Company { get; set; }
     }
 }

@@ -14,11 +14,9 @@ namespace CoreBusiness
         public string Name { get; set; }
         public string Description { get; set; }
 
+        //navigation for EF core
         public List<Project> Projects { get; set; }
 
-        public bool Any(Func<object, bool> value)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }
