@@ -15,6 +15,8 @@ namespace CoreBusiness
         public string Name { get; set; }
         [Required]
         public int UserId { get; set; }
+
+        public string  TicketStatus { get; set; }
         
         
     }

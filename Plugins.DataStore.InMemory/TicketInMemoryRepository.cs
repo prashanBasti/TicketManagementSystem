@@ -16,8 +16,9 @@ namespace Plugins.DataStore.InMemory
             //Init with some default values
             tickets = new List<Ticket>()
            {
-               new Ticket {TicketId = 1, UserId = 1, Name = "Deployment to UAT"},
-               new Ticket {TicketId = 2, UserId = 2, Name = "User Training"}
+               new Ticket {TicketId = 1, UserId = 1, Name = "Deployment to UAT", TicketStatus = "Open"},
+               new Ticket {TicketId = 2, UserId = 2, Name = "User Training", TicketStatus = "In-Progress"},
+               new Ticket {TicketId = 3, UserId = 2, Name = "Finish Cwk2", TicketStatus = "Done"}
            };
         }
 

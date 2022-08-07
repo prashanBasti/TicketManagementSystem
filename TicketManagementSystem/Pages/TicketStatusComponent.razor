@@ -1,0 +1,91 @@
+﻿@page "/ticketstatus"
+
+@using UseCases.TicketsUseCases
+@using UseCases.UseCaseInterfaces
+@using UseCases.UsersUseCases
+@inject IViewTicketUseCase ViewTicketUseCase
+@inject IGetTicketByIdUseCase GetTicketByIdUseCase
+@inject IDeleteTicketUseCase DeleteTicketUseCase
+@inject IGetUserByIdUseCase GetUserByIdUseCase
+@inject NavigationManager NavigationManager
+
+<h3>Ticket Status</h3>
+<br />
+@if(tickets != null)
+{
+    <table>
+        <thead> 
+            <tr>
+                <th>Assigned User</th>
+                <th>Ticket Description</th>
+                <th>Ticket Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var ticket in tickets)
+
+            {
+                <tr>
+                    <td>@GetUserByIdUseCase.Execute(ticket.UserId)?.Name</td>
+                    <td>@ticket.Name</td>
+                    <div class="form-group">
+                        <select id="ticketstatus" @bind="ticket.TicketId" class="form-control">
+                        <option selected></option>
+                            @foreach (var ticketstatus in tickets)
+                                    {
+                                    <option value ="@ticketstatus.TicketId">@ticketstatus.TicketStatus</option>
+                                    }
+                        </select>
+                     </div>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+<br /> 
+
+
+
+@code {
+
+    [Parameter]
+    public string TicketId { get; set; }
+
+    private Ticket ticket ;
+
+    private IEnumerable<User> users;
+    private IEnumerable<Ticket> tickets;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        tickets = ViewTicketUseCase.Execute();
+    }
+
+    private void OnEditTicket(Ticket ticket)
+    {
+        NavigationManager.NavigateTo($"/editticket/{ticket.TicketId}");
+    }
+
+
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        if(int.TryParse(this.TicketId,out int ITicketId))
+        {
+            var tick = GetTicketByIdUseCase.Execute(ITicketId);
+            this.ticket = new Ticket { 
+                TicketId = tick.TicketId, 
+                Name = tick.Name,
+                UserId = tick.UserId,
+                TicketStatus = tick.TicketStatus
+        };
+
+        }
+
+    }
+}
