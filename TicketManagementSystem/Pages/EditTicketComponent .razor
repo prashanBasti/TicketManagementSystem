@@ -1,0 +1,91 @@
+﻿
+@page "/editticket/{ticketId}"
+
+@using UseCases
+@using UseCases.UseCaseInterfaces
+
+@inject NavigationManager NavigationManager
+@inject IAddProjectUseCase AddProjectUseCase
+@inject UseCases.UseCaseInterfaces.IGetProjectByIdUseCase GetProjectByIdUseCase
+@inject IEditProjectUseCase EditProjectUseCase
+@inject IViewCompaniesUseCase ViewCompaniesUseCase
+
+<h3>Edit Ticket</h3>
+<br />
+@if (ticket != null)
+{
+    <EditForm Model = "ticket" OnValidSubmit="OnValidSubmit">
+        <DataAnnotationsValidator></DataAnnotationsValidator>
+        <ValidationSummary> </ValidationSummary>
+
+        <div class="form-group">
+            <label for="name">Name</label>
+            <InputText id="name" @bind-Value="ticket.Name" class="form-control"></InputText>
+        </div>
+
+        <div class="form-group">
+            <label for="user">User</label>
+            <select id="user" @bind="ticket.UserId" class="form-control">
+                <option selected></option>
+                @foreach (var usr in users)
+                {
+                    <option value ="@usr.UserId">@usr.Name</option>
+                }
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="name">Description</label>
+            <InputText id="name" @bind-Value="project.Description" class="form-control"></InputText>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-primary" @onclick="OnCancel">Cancel</button>
+    </EditForm>
+}
+
+
+@code {
+    [Parameter]
+    public string TicketId { get; set; }
+
+    private Ticket ticket;
+    private IEnumerable<User> users;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        companies = ViewUsersUseCase.Execute();
+    }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        if(int.TryParse(this.TicketId,out int ITicketId))
+        {
+            var tick = GetTicketByIdUseCase.Execute(ITicketId);
+            this.ticket = new Ticket { 
+                TicketId = tick.TicketId, 
+                Name = tick.Name,
+                UserId = tick.UserId,
+        };
+
+        }
+
+    }
+
+    private void OnValidSubmit()
+    {
+        EditTicketUseCase.Execute(this.ticket);
+        NavigationManager.NavigateTo("/tickets");
+
+    }
+
+    private void OnCancel()
+    {
+        NavigationManager.NavigateTo("/tickets");
+    }
+
+}

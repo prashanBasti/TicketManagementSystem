@@ -1,0 +1,72 @@
+﻿@page "/tickets"
+
+@using UseCases.TicketsUseCases
+@using UseCases.UseCaseInterfaces
+@using UseCases.UsersUseCases
+@inject IViewProjectsUseCase ViewProjectsUseCase
+@inject IGetCompanyByIdUseCase GetCompanyByIdUseCase
+@inject IDeleteProjectUseCase DeleteProjectUseCase
+@inject NavigationManager NavigationManager
+
+<h3>Tickets</h3>
+<br />
+@if(tickets != null)
+{
+    <table>
+        <thead> 
+            <tr>
+                <th>Assigned User</th>
+                <th>Ticket Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var ticket in tickets)
+
+            {
+                <tr>
+                    <td>@GetUserByIdUseCase.Execute(ticket.UserId.Value)?.Name</td>
+                    <td>@ticket.Name</td>
+                    <td>
+                        <button type="button" class="btn btn-link" @onclick="@(()=>OnEditTicket(ticket))">Edit</button>
+                        &nbsp;
+                        <button type="button" class="btn btn-link" @onclick="@(()=>OnDeleteTicket(ticket.TicketId))">Delete</button>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+<br /> 
+<button type="button" @onclick = "OnClickAddTicket" class=" btn btn-primary">Add Ticket</button>
+
+
+
+
+@code {
+    private IEnumerable<Ticket> tickets;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        tickets = ViewTicketsUseCase.Execute();
+    }
+
+    private void OnClickAddTicket()
+    {
+        NavigationManager.NavigateTo("/addtickets");
+    }
+
+    private void OnEditTicket(Ticket ticket)
+    {
+        NavigationManager.NavigateTo($"/editticket/{ticket.TicketId}");
+    }
+
+    private void OnDeleteTicket(int ticketId)
+    {
+        DeleteTicketUseCase.Execute(ticketId);
+    }
+
+
+}

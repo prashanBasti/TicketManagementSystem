@@ -8,7 +8,7 @@ using UseCases.DataStorePluginInterfaces;
 
 namespace Plugins.DataStore.InMemory
 {
-    public class TicketInMemoryRepository : ITicketInMemoryRepository
+    public class TicketInMemoryRepository : ITicketRepository
     {
         private List<Ticket> tickets;
         public TicketInMemoryRepository()

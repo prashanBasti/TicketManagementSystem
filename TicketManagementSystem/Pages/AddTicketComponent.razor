@@ -1,0 +1,66 @@
+﻿@page "/addticket"
+
+
+@using UseCases
+@using UseCases.TicketsUseCases
+@using UseCases.UsersUseCases
+@inject NavigationManager NavigationManager
+@inject UseCases.UseCaseInterfaces.IViewProjectsUseCase ViewCompaniesUseCase
+@inject UseCases.UseCaseInterfaces.IAddProjectUseCase AddProjectUseCase
+@inject IViewCompaniesUseCase ViewCompaniesUseCase
+
+<h3>Add Ticket</h3>
+
+@if (ticket != null)
+{
+    <EditForm Model = "ticket" class = "form-inline" OnValidSubmit="OnValidSubmit">
+        <DataAnnotationsValidator></DataAnnotationsValidator>
+        <ValidationSummary> </ValidationSummary>
+
+        <div class="form-group">
+            <label for="name">Name</label>
+            <InputText id="name" @bind-Value="ticket.Name" class="form-control"></InputText>
+        </div>
+
+       <div class="form-group">
+            <label for="user">User</label>
+            <select id="user" @bind="ticket.UserId" class="form-control">
+                <option selected></option>
+                @foreach (var usr in users)
+                {
+                    <option value ="@usr.UserId">@usr.Name</option>
+                }
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-primary" @onclick="OnCancel">Cancel</button>
+    </EditForm>
+}
+
+
+@code {
+    private Ticket ticket;
+    private IEnumerable<User> users;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        ticket = new Ticket();
+        users = ViewUsersUseCase.Execute();
+    }
+
+    private void OnValidSubmit()
+    {
+        AddTicketUseCase.Execute(ticket);
+        NavigationManager.NavigateTo("/tickets");
+
+    }
+
+    private void OnCancel()
+    {
+        NavigationManager.NavigateTo("/tickets");
+    }
+
+}
