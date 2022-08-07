@@ -15,8 +15,7 @@ namespace CoreBusiness
         public int? ProjectId { get; set; }
         [Required]
         public string Name { get; set; }
-        [Required]
+       
 
-        public Project Project{ get; set; }
     }
 }

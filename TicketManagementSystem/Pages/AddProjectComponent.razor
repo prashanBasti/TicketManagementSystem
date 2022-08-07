@@ -20,13 +20,13 @@
             <InputText id="name" @bind-Value="project.Name" class="form-control"></InputText>
         </div>
 
-        <div class="form-group">
+       <div class="form-group">
             <label for="company">Company</label>
-            <select id="company" @bind = "project.CompanyId" class="form-control">
+            <select id="company" @bind="project.CompanyId" class="form-control">
                 <option selected></option>
                 @foreach (var comp in companies)
                 {
-                    <option value=" @comp.CompanyId">@comp.Name</option>
+                    <option value ="@comp.CompanyId">@comp.Name</option>
                 }
             </select>
         </div>
