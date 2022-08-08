@@ -9,5 +9,6 @@ namespace Plugins.DataStore.InMemory
         Ticket GetTicketById(int ticketId);
         IEnumerable<Ticket> GetTickets();
         void UpdateTicket(Ticket ticket);
+        IEnumerable<Ticket> Get(string ticketStatus);
     }
 }

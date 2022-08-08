@@ -1,38 +1,83 @@
 ﻿@page "/transactions" 
 
 @using UseCases
+@using UseCases.TicketsUseCases
+@using UseCases.UsersUseCases
+@using UseCases.UseCaseInterfaces
+
+
 @inject IJSRuntime JS
+@inject IViewTicketUseCase ViewTicketUseCase
+@inject IGetUserByIdUseCase GetUserByIdUseCase
+@inject IGetTransactionsUseCase GetTransactionsUseCase
+@inject IGetTicketByStatusUseCase GetTicketByStatusUseCase
+
 
 <h3>Board Report</h3>
 
-<div class = "row">
-        <div class=" col-4 ">
-           <label for="ticketstatus">Ticket Status</label> 
-           <input type="text" id="ticketstatus" class="form-control" @bind-value="ticketStatus"/>
-        </div>
+    <div class = "row">
+            <div class=" col-4 ">
+               <label for="ticketstatus">Ticket Status</label> 
+               <select id="ticketstatus" class="form-control" @bind="this.ticketStatus">
+                        <option>Open</option>
+                        <option>In-Progress</option>
+                        <option>Done</option>
+               </select>
+            </div>
 
-
-        <div class = col-2">
-            <label>&nbsp;</label>
-            <button type="button" class="btn btn-primary form-control">Search</button>
-        </div>
-
+            <div>
+                <label>&nbsp;</label>
+                <button type="button" class="btn btn-primary form-control" @onclick="SearchTransactions">Search</button>
+            </div>
         
-        <div>
-            <label>&nbsp;</label>
-            <button type="button" class="btn btn-primary form-control" @onclick="PrintReport">Print</button>
-        </div>
-</div>
-<br />
+            <div>
+                <label>&nbsp;</label>
+                <button type="button" class="btn btn-primary form-control" @onclick="PrintReport">Print</button>
+            </div>
+    </div>
+<br/>
+
+ <table>
+        <thead> 
+            <tr>
+                <th>Assigned User</th>
+                <th>Ticket Name</th>
+                <th>Ticket Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if(tickets != null)
+            {
+            @foreach(var ticket in tickets)
+            {
+                <tr>
+                    <td>@GetUserByIdUseCase.Execute(ticket.UserId)?.Name</td>
+                    <td>@ticket.Name</td>
+                    <td>@ticket.TicketStatus</td>
+                </tr>
+            }
+            }
+        </tbody>
+    </table>
 
 @code {
     private string ticketStatus;
 
+    private Ticket ticket ;
+
+    private IEnumerable<CoreBusiness.Ticket> tickets;
+
     protected override void OnInitialized()
     {
         base.OnInitialized();
+
     }
 
+
+    private void SearchTransactions()
+    {
+        tickets = GetTicketByStatusUseCase.Execute(ticketStatus);
+    }
     //private void LoadTransactions()
     //{
     //    transactions = GetTransactionsUseCase.Execute(ticketStatus);

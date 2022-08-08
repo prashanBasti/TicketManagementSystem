@@ -59,6 +59,14 @@ namespace Plugins.DataStore.InMemory
             }
         }
 
+        public IEnumerable<Ticket> Get(string ticketStatus)
+        {
+            if (string.IsNullOrEmpty(ticketStatus))
+                return tickets;
+            else
+                return tickets.Where(x => string.Equals(x.TicketStatus, ticketStatus, StringComparison.OrdinalIgnoreCase));
+        }
+
         public void DeleteTicket(int ticketId)
         {
             var ticketToDelete = GetTicketById(ticketId);

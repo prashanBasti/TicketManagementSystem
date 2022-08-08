@@ -8,7 +8,7 @@ using CoreBusiness;
 
 namespace Plugins.DataStore.InMemory
 {
-    public class TransactionInMemoryRepository/* : ITransactionRepository*/
+    public class TransactionInMemoryRepository : ITransactionRepository
     {
         private List<Transaction> transactions;
 

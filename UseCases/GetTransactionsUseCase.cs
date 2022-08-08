@@ -1,4 +1,4 @@
-﻿using System.Transactions;
+﻿using CoreBusiness;
 using UseCases.DataStorePluginInterfaces;
 using UseCases.UseCaseInterfaces;
 
@@ -17,7 +17,7 @@ namespace UseCases
             string ticketStatus
             )
         {
-            return transactionRepository.Search(ticketStatus);
+            return transactionRepository.Get(ticketStatus);
         }
     }
 }

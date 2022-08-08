@@ -19,17 +19,18 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
 
-//builder.Services.AddDbContext<ManagementContext>(options =>
-//{
-//    options.UseSqlServer(Configuration.GetConnectionString(DefaultConnection));
-//});
-
+builder.Services.AddDbContext<ManagementContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
 
 //Injection of Dependencies for In-Memory Data Store
 builder.Services.AddScoped<ICompanyRepository, CompanyInMemoryRepository>();
 builder.Services.AddScoped<IProjectRepository, ProjectInMemoryRepository>();
 builder.Services.AddScoped<IUserRepository, UserInMemoryRepository>();
 builder.Services.AddScoped<ITicketRepository, TicketInMemoryRepository>();
+builder.Services.AddScoped<ITransactionRepository, TransactionInMemoryRepository>();    
+
 
 
 
@@ -58,9 +59,8 @@ builder.Services.AddTransient<IEditTicketUseCase, EditTicketUseCase>();
 builder.Services.AddTransient<IDeleteTicketUseCase, DeleteTicketUseCase>();
 builder.Services.AddTransient<IGetTicketByIdUseCase, GetTicketByIdUseCase>();
 
-//builder.Services.AddTransient<IGetTransactionsUseCase, GetTransactionsUseCase>();
-
-
+builder.Services.AddTransient<IGetTransactionsUseCase, GetTransactionsUseCase>();
+builder.Services.AddTransient<IGetTicketByStatusUseCase, GetTicketByStatusUseCase>();
 
 var app = builder.Build();
 
