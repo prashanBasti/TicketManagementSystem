@@ -12,7 +12,7 @@ namespace Plugins.DataStore.SQL
 
         public DbSet<Company> Companies { get; set; }
         public DbSet<Project> Projects { get; set; }
-        public DbSet<Transaction> Transactions { get; set; }
+        //public DbSet<Transaction> Transactions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

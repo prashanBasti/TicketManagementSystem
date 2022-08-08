@@ -19,10 +19,10 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
 
-builder.Services.AddDbContext<ManagementContext>(options =>
-{
-    options.UseSqlServer(Configuration.GetConnectionString(DefaultConnection));
-});
+//builder.Services.AddDbContext<ManagementContext>(options =>
+//{
+//    options.UseSqlServer(Configuration.GetConnectionString(DefaultConnection));
+//});
 
 
 //Injection of Dependencies for In-Memory Data Store
@@ -58,7 +58,7 @@ builder.Services.AddTransient<IEditTicketUseCase, EditTicketUseCase>();
 builder.Services.AddTransient<IDeleteTicketUseCase, DeleteTicketUseCase>();
 builder.Services.AddTransient<IGetTicketByIdUseCase, GetTicketByIdUseCase>();
 
-builder.Services.AddTransient<IGetTransactionsUseCase, GetTransactionsUseCase>();
+//builder.Services.AddTransient<IGetTransactionsUseCase, GetTransactionsUseCase>();
 
 
 

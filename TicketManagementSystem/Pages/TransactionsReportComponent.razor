@@ -11,13 +11,14 @@
            <input type="text" id="ticketstatus" class="form-control" @bind-value="ticketStatus"/>
         </div>
 
+
         <div class = col-2">
             <label>&nbsp;</label>
-            <button type="button" class="btn btn-primary form-control" @onclick="LoadTransactions">Search</button>
+            <button type="button" class="btn btn-primary form-control">Search</button>
         </div>
 
         
-        <div class = col-2">
+        <div>
             <label>&nbsp;</label>
             <button type="button" class="btn btn-primary form-control" @onclick="PrintReport">Print</button>
         </div>
@@ -32,10 +33,10 @@
         base.OnInitialized();
     }
 
-    private void LoadTransactions()
-    {
-        transactions = GetTransactionsUseCase.Execute(ticketStatus);
-    }
+    //private void LoadTransactions()
+    //{
+    //    transactions = GetTransactionsUseCase.Execute(ticketStatus);
+    //}
 
     private void PrintReport()
     {
